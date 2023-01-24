@@ -89,3 +89,11 @@ body {
 .btn-orange.active:hover {
   background-color: #FAC68D;
 }
+
+.tab-bar {
+  width: 200px;
+  height: 5px;
+  background-color: #FFF;
+  border-radius: 5px;
+  margin: 30px auto 0 auto;
+}
