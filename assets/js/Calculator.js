@@ -1,8 +1,9 @@
 export class Calculator {
   constructor() {
+    this.output = '0';
     this.currentValue = '0';
-    this.previousValue = '';
-    this.currentOperator = '';
+    this.previousValue = null;
+    this.currentOperator = null;
     this.numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ','];
     this.elResult = document.querySelector('.result');
     this.elClear = document.querySelector('.btn-clear');
@@ -104,19 +105,23 @@ export class Calculator {
   }
 
   updateResult(value) {
-    // console.log(value);
-    // console.log(this.currentValue);
-    if(this.currentValue.length < 9) {
+    const valueLength = this.currentValue.replace('-','').replace(',','').length;
+
+    if(valueLength < 9) {
       if(value == "0") {
-        if(this.currentValue != "0") {
+        if(this.currentValue != "0" && this.currentValue != "-0") {
           this.currentValue += value;
         }
       } else {
-        if(this.currentValue == "0") {
+        if(this.currentValue == "0" || this.currentValue == "-0") {
           if(value == ",") {
-            this.currentValue = "0,";
+            this.currentValue = `${this.currentValue},`;
           } else {
-            this.currentValue = value;
+            if(this.currentValue == "0" ) {
+              this.currentValue = value;
+            } else {
+              this.currentValue = `-${value}`;
+            }
           }
         } else {
           if(value == ",") {
@@ -135,24 +140,36 @@ export class Calculator {
   writeResult() {
     this.currentValue == "0" || this.currentValue == "-0" ? this.elClear.textContent = "AC" : this.elClear.textContent = "C";
 
-    if(this.currentValue.length > 6) {
-      this.elResult.textContent = this.currentValue;
-    } else if(this.currentValue.length > 3) {
-      this.elResult.textContent = this.currentValue;
+    const isComma = this.currentValue.includes(',');
+    const value0 = this.currentValue.split(',')[0];
+    let array = value0.split("").reverse();
+    let result = this.currentValue;
+
+    if(value0.length > 6) {
+      array.splice(3,0," ");
+      array.splice(7,0," ");
+      result = array.reverse().join("");
+      isComma ? result = `${result},${this.currentValue.split(',')[1]}`: '';
+
+      this.elResult.textContent = result;
+    } else if(value0.length > 3) {
+      array.splice(3,0," ");
+      result = array.reverse().join("");
+      isComma ? result = `${result},${this.currentValue.split(',')[1]}`: '';
+
+      this.elResult.textContent = result;
     } else {
-      this.elResult.textContent = this.currentValue;
+      this.elResult.textContent = result;
     }
-    
-    if(this.currentValue.toString().length <= 6) {
-      this.elResult.style = "font-size: 85px";
-    } else if(this.currentValue.length == 7) {
-      this.elResult.style = "font-size: 79px";
-    } else if(this.currentValue.length == 8) {
-      this.elResult.style = "font-size: 70px";
-    } else if(this.currentValue.length == 9){
-      this.elResult.style = "font-size: 62px";
-    } else {
-      this.elResult.style = "font-size: 56px";
+
+    // Adjust font-size if overflows container
+    let decreasePixels = 0;
+    this.elResult.style.fontSize = `${85-decreasePixels}px`;
+    for (let i = 0; i < 40; i++) {
+      if(this.elResult.offsetWidth > 360) {
+        this.elResult.style.fontSize = `${85-decreasePixels}px`;
+        decreasePixels += 1;
+      }
     }
   }
 
