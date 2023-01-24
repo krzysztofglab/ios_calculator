@@ -43,6 +43,12 @@ body {
   font-family: Roboto;
 }
 
+.btn-clear {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .btn-circle {
   width: 80px;
   height: 80px;
