@@ -19,6 +19,11 @@ body {
   width: 360px;
 }
 
+.result-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .result {
   text-align: right;
   padding: 0 22px 0 22px;
@@ -26,6 +31,7 @@ body {
   color: white;
   font-size: 85px;
   font-weight: 300;
+  white-space: nowrap;
 }
 
 .buttons {
