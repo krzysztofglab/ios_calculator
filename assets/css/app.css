@@ -39,7 +39,7 @@ body {
   margin: 5px;
   font-size: 30px;
   font-weight: 500;
-  transition-duration: 200ms;
+  transition-duration: 300ms;
 }
 
 .btn-circle {
@@ -52,6 +52,8 @@ body {
   width: 170px;
   height: 80px;
   border-radius: 50px;
+  text-align: left;
+  padding-left: 32px;
 }
 
 .btn-light {
