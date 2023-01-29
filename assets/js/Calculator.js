@@ -76,7 +76,7 @@ export class Calculator {
     this.val2 = null;
     this.result = null;
     this.operator = null;
-    this.output = '0';
+    this.output = null;
     this.writeResult();
   }
 
@@ -99,7 +99,7 @@ export class Calculator {
       this.val1 = this.output;
     } else if(this.val2 == null) {
       if(this.operator == null) {
-        console.log('c');
+       
       } else {
         if(this.output == null) {
           this.val2 = this.val1;
@@ -108,13 +108,14 @@ export class Calculator {
         }
         this.output = eval(`${this.val1} ${this.operator} ${this.val2}`).toString();
         this.writeResult();
-        this.output = '0';
+        this.output = null;
       }
     } else {
+      console.log
       this.val1 = eval(`${this.val1} ${this.operator} ${this.val2}`).toString();
       this.output = eval(`${this.val1} ${this.operator} ${this.val2}`).toString();
       this.writeResult();
-      this.output = '0';
+      this.output = null;
     }
   }
 
